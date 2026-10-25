@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    サーバーのサンプル。コード生成の出力(Generated/)を MasterMemory と一緒にコンパイルできるかを確かめる。
+    Generated/ は make code-gen(または make master-gen)で作られる(git には入れない)。
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Sample.MasterData</RootNamespace>
+    <AssemblyName>Sample.Server</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MasterMemory" Version="3.0.4" />
+    <PackageReference Include="MessagePack" Version="3.1.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MasterMemory.Addons.Core\MasterMemory.Addons.Core.csproj" />
+  </ItemGroup>
+
+</Project>

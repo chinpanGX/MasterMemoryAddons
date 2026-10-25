@@ -1,0 +1,6 @@
+アイテム(武器),水平分割の例: item_weapon.csv と item_armor.csv を結合して item テーブルになる,,,
+1〜2行目はコメント、3行目は型(参考)、4行目がヘッダ、5行目以降がデータ,,,,
+int,ItemCategory,string,string,int
+ItemId,Category,Name,IconAddress,SellPrice
+1,武器,銅の剣,Icons/sword_copper,10
+2,武器,鉄の剣,Icons/sword_iron,50

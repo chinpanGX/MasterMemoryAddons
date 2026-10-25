@@ -1,0 +1,13 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+*.suo
+.obsidian/
+out/
+
+# make code-gen / make master-gen で作られるサンプルの生成物
+samples/*/Generated/
+samples/*/masterdata.bytes
+samples/*/masterdata.manifest.json

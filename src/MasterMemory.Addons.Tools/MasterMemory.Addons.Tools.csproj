@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <AssemblyName>MasterMemory.Addons.Tools</AssemblyName>
+        <RootNamespace>MasterMemory.Addons.Tools</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- 構文木の書き換えと、master-gen でのメモリ上のコンパイル。MasterMemory の Source Generator は Roslyn 4.3 以上が必要 -->
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0"/>
+        <!-- 設定ファイル(YAML)の読み込み -->
+        <PackageReference Include="YamlDotNet" Version="18.1.0"/>
+        <!--
+          master-gen で、生成ソースのコンパイル時の参照と、実行時に使う。バイナリはこのバージョンで作られるので、
+          利用者のアプリも同じバージョンを使う(docs/design/master-gen.md)。
+          Tools 自身には Source Generator を効かせない(analyzers を除く)。generator の DLL は下で出力先にコピーし、master-gen の実行時に読み込む。
+          MessagePack 3.1.3(MasterMemory 3.0.4 が依存する最低のバージョン)には既知の脆弱性があるため、3.1.12 を明示する。
+        -->
+        <PackageReference Include="MasterMemory" Version="3.0.4" ExcludeAssets="analyzers" GeneratePathProperty="true"/>
+        <PackageReference Include="MessagePack" Version="3.1.12" ExcludeAssets="analyzers" GeneratePathProperty="true"/>
+        <PackageReference Include="MessagePackAnalyzer" Version="3.1.12" ExcludeAssets="all" GeneratePathProperty="true"/>
+        <!-- MasterMemory / MessagePack の依存。client 用のコンパイルで netstandard 版の DLL を参照するため、パスを得る目的で明示する -->
+        <PackageReference Include="MasterMemory.Annotations" Version="3.0.4" GeneratePathProperty="true"/>
+        <PackageReference Include="MessagePack.Annotations" Version="3.1.12" GeneratePathProperty="true"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!--
+          client 用のコンパイルで参照する netstandard2.1 の参照アセンブリ(Unity と同じ API だけを使えるようにする)。
+          参照用のパッケージ(DotnetPlatform)は PackageReference にできないので、ダウンロードだけ行う。
+        -->
+        <PackageDownload Include="NETStandard.Library.Ref" Version="[2.1.0]"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- client 用のコンパイルの参照。出力先の references/client に置く(docs/design/master-gen.md の「参照」) -->
+        <ClientReference Include="$(NuGetPackageRoot)netstandard.library.ref\2.1.0\ref\netstandard2.1\*.dll"/>
+        <ClientReference Include="$(PkgMasterMemory)\lib\netstandard2.0\MasterMemory.dll"/>
+        <ClientReference Include="$(PkgMasterMemory_Annotations)\lib\netstandard2.0\MasterMemory.Annotations.dll"/>
+        <ClientReference Include="$(PkgMessagePack)\lib\netstandard2.1\MessagePack.dll"/>
+        <ClientReference Include="$(PkgMessagePack_Annotations)\lib\netstandard2.0\MessagePack.Annotations.dll"/>
+        <None Include="@(ClientReference)" Link="references\client\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(PkgMasterMemory)\analyzers\dotnet\cs\MasterMemory.SourceGenerator.dll"
+              Link="generators\MasterMemory.SourceGenerator.dll" CopyToOutputDirectory="PreserveNewest" Visible="false"/>
+        <None Include="$(PkgMessagePackAnalyzer)\analyzers\roslyn4.3\cs\MessagePack.SourceGenerator.dll"
+              Link="generators\MessagePack.SourceGenerator.dll" CopyToOutputDirectory="PreserveNewest" Visible="false"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\MasterMemory.Addons.Core\MasterMemory.Addons.Core.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- テストで、master-gen が作ったバイナリをコンパイルした型で読み直すため -->
+        <InternalsVisibleTo Include="MasterMemory.Addons.Tools.Tests"/>
+    </ItemGroup>
+
+</Project>

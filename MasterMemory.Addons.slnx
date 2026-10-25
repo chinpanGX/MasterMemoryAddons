@@ -1,0 +1,11 @@
+<Solution>
+    <Folder Name="/src/">
+        <Project Path="src/MasterMemory.Addons.Attributes/MasterMemory.Addons.Attributes.csproj" />
+        <Project Path="src/MasterMemory.Addons.Tools/MasterMemory.Addons.Tools.csproj" />
+        <Project Path="src/MasterMemory.Addons.Core/MasterMemory.Addons.Core.csproj" />
+    </Folder>
+    <Folder Name="/tests/">
+        <Project Path="tests/MasterMemory.Addons.Tools.Tests/MasterMemory.Addons.Tools.Tests.csproj" />
+        <Project Path="tests/MasterMemory.Addons.Core.Tests/MasterMemory.Addons.Core.Tests.csproj" />
+    </Folder>
+</Solution>

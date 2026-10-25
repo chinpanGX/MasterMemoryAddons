@@ -1,0 +1,37 @@
+# MasterMemory.Addons.Tools の設定ファイルのサンプル。形式は docs/design/config.md と docs/design/master-gen.md。
+# パスは、このファイルのあるディレクトリからの相対パス。
+#
+#   make code-gen [ENV=dev]      定義から client / server 用のソースを作る(コード生成)
+#   make master-gen [ENV=dev]    CSV を検証してバイナリを作る(マスタ生成。生成ソースが古ければコード生成もやり直す)
+#
+# 注意: 各 outputs の source ディレクトリは、生成のたびに中身を丸ごと入れ替える。手書きのファイルを置かないこと。
+
+definitions: Definitions
+csv: csv                           # CSV のディレクトリ(master-gen で使う)
+
+outputs:
+  # samples/Client は Unity の代わり(netstandard2.1、C# 9)。生成ソースを MasterMemory と一緒にコンパイルする
+  - name: unity
+    target: client
+    source: Client/Generated
+    namespace: Sample.MasterData   # MasterDataSchema(スキーマのハッシュ。client では暗号化の鍵も兼ねる)を出力する名前空間。必須
+    binary: Client/masterdata.bytes
+    encrypt: true                  # client のときだけ書ける
+  - name: api-server
+    target: server
+    source: Server/Generated
+    namespace: Sample.MasterData
+    binary: Server/masterdata.bytes
+  # binary を書かない出力先は、master-gen でバイナリを作らない
+  - name: battle-server
+    target: server
+    source: ../out/sample/battle-server
+    namespace: Sample.MasterData.Battle
+
+environments:
+  # 書いた項目だけ上書きする。出力先は name で指定する。target は上書きできない
+  dev:
+    outputs:
+      unity:
+        source: ../out/sample/unity-dev
+  production: { }

@@ -1,0 +1,6 @@
+ドロップテーブル(サーバー専用),,
+,,
+int,int,int
+DropTableId,ItemId,Weight
+1,1,70
+2,101,30

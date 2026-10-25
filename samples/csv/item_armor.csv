@@ -1,0 +1,6 @@
+アイテム(防具),,,,
+,,,,
+int,ItemCategory,string,string,int
+ItemId,Category,Name,IconAddress,SellPrice
+101,防具,"布の服, 軽い",Icons/cloth,5
+102,防具,革の鎧,,

@@ -1,0 +1,39 @@
+# 既定: Git がテキストと判定したファイルは、リポジトリ内も作業ツリーも LF にする
+* text=auto eol=lf
+
+# ソース・プロジェクト・設定・ドキュメント(LF 固定)
+*.cs        text eol=lf
+*.csproj    text eol=lf
+*.props     text eol=lf
+*.targets   text eol=lf
+*.slnx      text eol=lf
+*.json      text eol=lf
+*.xml       text eol=lf
+*.config    text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.md        text eol=lf
+*.txt       text eol=lf
+*.csv       text eol=lf
+*.sh        text eol=lf
+*.ps1       text eol=lf
+Makefile    text eol=lf
+.gitattributes text eol=lf
+.gitignore     text eol=lf
+.editorconfig  text eol=lf
+
+# Windows のシェルが CRLF を必要とするもの
+*.bat       text eol=crlf
+*.cmd       text eol=crlf
+
+# バイナリ(改行変換しない)
+*.bytes     binary
+*.dll       binary
+*.pdb       binary
+*.exe       binary
+*.zip       binary
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
