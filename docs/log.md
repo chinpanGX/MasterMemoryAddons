@@ -1,7 +1,7 @@
 ---
 title: Wiki 変更履歴
 status: implemented
-updated: 2026-10-25
+updated: 2026-11-01
 ---
 
 # 変更履歴

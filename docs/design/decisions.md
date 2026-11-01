@@ -1,7 +1,7 @@
 ---
 title: 決定事項と未決定事項
 status: implemented
-updated: 2026-10-25
+updated: 2026-11-01
 ---
 
 # 決定事項と未決定事項
