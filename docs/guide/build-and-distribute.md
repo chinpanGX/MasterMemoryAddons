@@ -75,7 +75,8 @@ dotnet run --project src/MasterMemory.Addons.Tools -- code-gen --input samples/D
 
 - **サーバー**: `out/server` のソースを、MasterMemory の NuGet パッケージを参照するプロジェクトに含める。
 - **Unity**: `out/client` のソースを `Assets` 以下に置く。MasterMemory は NuGetForUnity で導入する (Unity 2022.3.12f1
-  以上)。
+  以上)。`MasterMemory.Addons.Core`(`MasterDataBinary` など、バイナリを読む処理)は Unity のパッケージとして `manifest.json` から入れる:
+  `"com.chinpangx.mastermemory.addons": "file:<相対パス>/src/MasterMemory.Addons.Core"`。
 
 MasterMemory の Source Generator が、`[MemoryTable]` の付いた型からデータベースのコードを生成する。
 

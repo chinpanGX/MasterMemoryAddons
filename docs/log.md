@@ -8,6 +8,7 @@ updated: 2026-10-25
 
 新しいものを上に追記します。形式: `- YYYY-MM-DD [ページ] 変更内容`
 
+- 2026-11-01 [dev/structure / build-and-distribute / decisions] Core を Unity のパッケージ(com.chinpangx.mastermemory.addons)としても使えるようにした(package.json・asmdef を Core のフォルダに置く)
 - 2026-10-25 [review / log] 履歴を1つのコミットにまとめるため、review.md と log.md に残っていたコミット番号を消した
 - 2026-10-25 [dev/structure] リポジトリの直下に README.md(日本語)と LICENSE(MIT)を置いた。直下に置くものの決まりを書き、名前空間の例(Tools.CodeGen)と Unity アセンブリの記述を直した
 - 2026-10-25 [review] main へのマージで履歴を1つのコミットにまとめるため、review.md から csv-input-rules ブランチのコミット番号を消した(main にある以前のコミットの番号は残した)

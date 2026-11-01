@@ -1,0 +1,7 @@
+{
+  "name": "com.chinpangx.mastermemory.addons",
+  "version": "0.1.0",
+  "displayName": "MasterMemory Addons",
+  "description": "MasterMemory のバイナリ(ヘッダ・暗号化)を読む実行時ライブラリ(MasterMemory.Addons.Core)。",
+  "unity": "7000.0"
+}

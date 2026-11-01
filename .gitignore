@@ -11,3 +11,5 @@ out/
 samples/*/Generated/
 samples/*/masterdata.bytes
 samples/*/masterdata.manifest.json
+bin~/
+obj~/

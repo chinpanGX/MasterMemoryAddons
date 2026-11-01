@@ -1,0 +1,11 @@
+<Project>
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+  <!-- Unity は ~ で終わるフォルダを読まない。dotnet build の出力が Unity のパッケージに入って型が重複しないようにする -->
+  <PropertyGroup>
+    <BaseOutputPath>bin~/</BaseOutputPath>
+    <BaseIntermediateOutputPath>obj~/</BaseIntermediateOutputPath>
+  </PropertyGroup>
+
+</Project>

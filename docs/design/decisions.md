@@ -101,9 +101,10 @@ updated: 2026-10-25
 | 2026-10-25 | マスタ生成は、すべての出力先のバイナリとマニフェストを先に一時ファイルに書き、すべて書けてから本来の名前に置き換える。一時ファイルの段階で失敗したら、一時ファイルを消して終了コード 1(元のファイルは変えない)(review の E4・E5)([master-gen](master-gen.md))(実装済み) |
 | 2026-10-25 | 生成ソースが古いかどうかは、`*.cs` の中身に加えて、作り直すと消えるファイル(生成しなくなったファイル・フォルダの `.meta`、手で置いたファイル)が残っているかでも判断する。生成するファイル・フォルダの `.meta` は比べない(2026-10-24 の「比べるのは `*.cs` だけ」を変える。review の E6)([master-gen](master-gen.md))(実装済み) |
 | 2026-10-25 | 配信の仕組み(CDN への配置とダウンロード)は本パッケージでは作らない。Addressables と利用者のプロジェクトが受け持つ。本パッケージが提供するのは、バイナリ・マニフェスト・スキーマの ID・`ReadHeader`・`Read` まで。クライアントが CDN のどのバイナリを読むかの決め方、差分更新の要否、サーバー側のマスターの読み込み・更新方法は、未決定から範囲外に移す([distribution](distribution.md)) |
-| 2026-10-25 | Unity 専用のアセンブリ(`MasterMemory.Addons.Unity`)は作らない。Unity のプロジェクトは Core と Attributes を直接参照する([dev/structure](../dev/structure.md)) |
+| 2026-10-25 | Unity 専用のアセンブリ(`MasterMemory.Addons.Unity`)は作らない。Unity のプロジェクトは Core と Attributes を直接参照する([dev/structure](../dev/structure.md)) (2026-11-01: Core は `file:` で参照する。Attributes は Unity では要らない) |
 | 2026-10-25 | データ段の検証の属性は `[Unique]`(列の一意性)と `[Exists]`(参照の整合性)。`[Exists]` は `typeof` で参照先の型を指し(`[Exists(typeof(Item))]` は主キー、`[Exists(typeof(Item), nameof(Item.Code))]` は列)、`AllowEmpty = true` で空欄を許す。値の範囲・空欄の禁止などの属性は、必要になったら足す([pipeline](pipeline.md))(実装済み) |
 | 2026-10-25 | マスタ生成は、MasterMemory の `db.Validate()` も呼ぶ(出力先ごと)。`IValidatable<T>` を使うかは利用者が判断する(本アドオンが勧めるのは属性での検証)([pipeline](pipeline.md))(実装済み) |
+| 2026-11-01 | Core を Unity のパッケージ(`com.chinpangx.mastermemory.addons`)としても使えるようにする。Core のフォルダに `package.json`・asmdef を置き、ビルドの出力を `bin~/`・`obj~/` にする(「Unity 専用のアセンブリは作らない」(2026-10-25)は変えない。ソースはそのまま) |
 
 ## 未決定
 

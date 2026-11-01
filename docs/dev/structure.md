@@ -20,7 +20,7 @@ updated: 2026-10-25
 | `MasterMemory.Addons.Server`     | 未定                               | Core             | サーバー専用の処理 (ファイルからの読み込み、差し替えなど)。**必要になったら作る**                                     |
 | `MasterMemory.Addons.Tools`      | `net10.0`                          | Core, Attributes | コード生成 / マスタ生成(検証を含む)                                                                                   |
 
-- 参照の向きは「Core ← Server / Tools」だけ。Unity のプロジェクトは Core と Attributes を直接参照する。
+- 参照の向きは「Core ← Server / Tools」だけ。Unity のプロジェクトは Core を `file:` で参照する(Core のフォルダに `package.json`・asmdef がある。2026-11-01)。Attributes は Unity では要らない。
 - Unity 専用のアセンブリ (`MasterMemory.Addons.Unity`)は作らない (2026-10-25 決定)。配信は Addressables と利用者のプロジェクトが受け持ち、
   読み込みは Core の `MasterDataBinary.Read` で足りるため。
 - 新しいアセンブリを足すのは、依存先か動く場所が違うときだけ。
